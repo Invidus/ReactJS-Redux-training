@@ -4,3 +4,9 @@
 .item img{
     width: 60px;
 }
+.postBlock{
+    padding: 10px;
+}
+.post{
+    margin: 10px;
+}
