@@ -7,15 +7,19 @@ import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 
 
-const App = () => {
+const App = (props) => {
+    let dialogs = [{ id: 1, name: 'Alex' },
+    { id: 2, name: 'Sasha' }, { id: 3, name: 'Vasya' },
+    { id: 4, name: 'Nomad' }, { id: 5, name: 'Andrey' }]
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header />
                 <Navbar />
                 <div className={'app-wrapper-content'}>
-                    <Route path = "/dialogs" component={Dialogs} />
-                    <Route path = "/profile" component={Profile} />
+                    <Route path = "/dialogs" render={ () =>  <Dialogs /> } />
+                    <Route path = "/profile" render={ () =>  <Profile/> } />
                 </div>
             </div>
         </BrowserRouter>
