@@ -6,10 +6,10 @@ import Message from './Message/Message';
 
 const Dialogs = (props) => { //Хранятся данные о диалогах 
       
-    let dialogsElements = props.dialogs // Обработка диалогов с сервера
+    let dialogsElements = props.state.dialogs // Обработка диалогов с сервера
     .map( d => <DialogItem name = { d.name } id = { d.id } />);
  
-    let messageElements = props.messages // Обработка сообщений с сервера
+    let messageElements = props.state.messages // Обработка сообщений с сервера
     .map(m => <Message message={m.message} />);
     return (
 
