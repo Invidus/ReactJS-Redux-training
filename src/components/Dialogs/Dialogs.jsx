@@ -5,7 +5,14 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 
 const Dialogs = (props) => { //Хранятся данные о диалогах 
-      
+    
+    let newMessageElement = React.createRef();
+    
+    let addMessage = () => {
+        let text = newMessageElement.current.value;
+        alert(text);
+    }
+
     let dialogsElements = props.state.dialogs // Обработка диалогов с сервера
     .map( d => <DialogItem name = { d.name } id = { d.id } />);
  
@@ -19,6 +26,12 @@ const Dialogs = (props) => { //Хранятся данные о диалогах
             </div>
             <div className={Style.messages}>
                 {messageElements}
+            </div>
+            <div >
+                <button onClick = { addMessage }> Send </button>
+            </div>
+            <div className = {Style.messages}>
+                <textarea ref = {newMessageElement}></textarea>
             </div>
         </div>
 

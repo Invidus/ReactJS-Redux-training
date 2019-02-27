@@ -16,3 +16,6 @@ a{
 .messages .message{
     color: blue;
 }
+.sendButton{
+    margin-left: 100px;
+}
