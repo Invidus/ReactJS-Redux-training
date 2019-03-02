@@ -11,7 +11,8 @@ const Posts = (props) => {
 
     let addPost = () => {
         let text = newPostElement.current.value; // current - native html element, 
-        
+        props.addPost(text);
+        newPostElement.current.value = '';
     }
 
 
