@@ -10,18 +10,21 @@ const Posts = (props) => {
     let newPostElement = React.createRef();// Create link(textarea)
 
     let addPost = () => {
-        let text = newPostElement.current.value; // current - native html element, 
-        props.addPost(text);
-        newPostElement.current.value = '';
+        // let text = newPostElement.current.value; // current - native html element, 
+        props.addPost();
     }
+    let onPostChange = () => {//syncronizing with bll 
+        let text = newPostElement.current.value;
+        props.updateNewPostText(text);
 
+    }
 
     return (
         <div className={style.postBlock}>
             <h4> my posts</h4>
             <div>
                 <div>
-                    <textarea ref = {newPostElement}></textarea>
+                    <textarea onChange = {onPostChange} ref = {newPostElement} value = {props.newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick = { addPost }>Post it! </button>
