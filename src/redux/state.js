@@ -1,4 +1,7 @@
-import { rerenderEntireTree } from "../render";
+
+let rerenderEntireTree = () => {
+    console.log('State changed');
+}
 
 let state = {
     profilePage: {
@@ -29,7 +32,7 @@ let state = {
     }
 }
 
-export let addPost = () =>{ //Add new post in Profile->Posts
+export const addPost = () =>{ //Add new post in Profile->Posts
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -40,13 +43,15 @@ export let addPost = () =>{ //Add new post in Profile->Posts
     rerenderEntireTree(state);
 }
 
-export let updateNewPostText = (newText) =>{ //updating text'a in textarea
+export const updateNewPostText = (newText) =>{ //updating text'a in textarea
 // traiding with ul -> bll -> ul  
         state.profilePage.newPostText = newText;
         rerenderEntireTree(state);
         
     };
-
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer; // Наблюдатель !почитать!
+}
 
 
 export default state;
