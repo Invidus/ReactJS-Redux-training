@@ -1,4 +1,5 @@
-
+const ADD_POST = 'ADD_POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 let store = {
     _callSubscriber() {
         console.log('State changed');
@@ -34,7 +35,7 @@ let store = {
 
 
     dispatch(action) {// объект {type: 'ADD-POST'}
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             //Add new post in Profile->Posts
             let newPost = {
                 id: 5,
@@ -42,9 +43,9 @@ let store = {
                 likes: 0
             };
             this._state.profilePage.posts.push(newPost);
-            this.this._state.profilePage.newPostText = '';
+            this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             // traiding with ul -> bll -> ul  
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
@@ -58,6 +59,12 @@ let store = {
         return this._state;
     }
 }
+
+export const addPostActionCreator = () => ({type: 'ADD_POST'})
+
+export const updateNewPostTextActionCreator = (text) => ({
+        type:'UPDATE_NEW_POST_TEXT', newText:text   
+})
 
 // let rerenderEntireTree = () => {
 //     console.log('State changed');
