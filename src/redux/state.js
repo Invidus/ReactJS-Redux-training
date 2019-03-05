@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE'; // Используем конст. дабы не ошибаться в нейминге
 let store = {
     _callSubscriber() {
         console.log('State changed');
@@ -10,7 +12,7 @@ let store = {
                 { id: 1, message: 'Hi', likes: 4 },
                 { id: 2, message: 'how are you?', likes: 6 },
             ],
-            newPostText: 'nowi text'
+            newPostText: 'new post text'
         },
         dialogsPage: {
             messages: [
@@ -23,6 +25,7 @@ let store = {
                 { id: 2, name: 'Sasha' }, { id: 3, name: 'Vasya' },
                 { id: 4, name: 'Nomad' }, { id: 5, name: 'Andrey' }
             ],
+            newMessageBody: ""
         },
         sideBar: {
             friends: [
@@ -49,6 +52,14 @@ let store = {
             // traiding with ul -> bll -> ul  
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber(this._state);
+        } else if (action.type == SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({ id: 6, message: body });
+            this._callSubscriber(this._state);
         }
     },
 
@@ -60,11 +71,17 @@ let store = {
     }
 }
 
-export const addPostActionCreator = () => ({type: 'ADD_POST'})
-
+export const addPostActionCreator = () => ({ type: ADD_POST })
 export const updateNewPostTextActionCreator = (text) => ({
-        type:'UPDATE_NEW_POST_TEXT', newText:text   
+    type: UPDATE_NEW_POST_TEXT, newText: text
 })
+
+export const sendMessageCreator = () => ({ type: SEND_MESSAGE })
+export const updateNewMessageBodyCreator = (body) =>
+    ({ type: UPDATE_NEW_MESSAGE_BODY, body: body })
+
+
+
 
 // let rerenderEntireTree = () => {
 //     console.log('State changed');
