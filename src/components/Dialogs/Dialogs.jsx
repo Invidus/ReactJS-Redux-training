@@ -3,7 +3,7 @@ import Style from './Dialogs.module.css';
 import { NavLink } from "react-router-dom";
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/dialogReducer';
+import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/state';
 
 const Dialogs = (props) => { //Хранятся данные о диалогах 
 
