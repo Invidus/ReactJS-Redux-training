@@ -7,24 +7,24 @@ import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/sta
 
 const Dialogs = (props) => { //Хранятся данные о диалогах 
 
-    // Обработка диалогов с сервера
-    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} />);
-    let messageElements = state.messages
-        .map(m => <Message message={m.message} />);
-    let newMessageBody = state.newMessageBody;
-
-
-    let state = props.dialogsPage;
+    let state = props.store.getState().dialogsPage;
     // let newMessageElement = React.createRef();
 
     let onSendMessageClick = () => {
-        props.sendMessage();
+        props.store.dispatch(sendMessageCreator());
     }
     let onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.updateNewMessageBody(body);
-
+        props.store.dispatch(updateNewMessageBodyCreator(body));
     }
+
+    let dialogsElements = state.dialogs // Обработка диалогов с сервера
+        .map(d => <DialogItem name={d.name} id={d.id} />);
+
+    let messageElements = state.messages
+        .map(m => <Message message={m.message} />);
+
+    let newMessageBody = state.newMessageBody;
 
     return (
 

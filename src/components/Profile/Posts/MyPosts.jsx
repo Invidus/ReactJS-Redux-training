@@ -12,12 +12,14 @@ const Posts = (props) => {
     
     let newPostElement = React.createRef();// Create link(textarea)
 
-    let onAddPost = () => {
-        props.addPost();
+    let addPost = () => {
+        // let text = newPostElement.current.value; // current - native html element, 
+        props.dispatch(addPostActionCreator());
     }
     let onPostChange = () => {//syncronizing with bll 
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        let action = updateNewPostTextActionCreator(text);
+        props.dispatch(action);
     }
 
     return (
@@ -28,7 +30,7 @@ const Posts = (props) => {
                     <textarea onChange = {onPostChange} ref = {newPostElement} value = {props.newPostText}></textarea>
                 </div>
                 <div>
-                    <button onClick = { onAddPost }>Post it! </button>
+                    <button onClick = { addPost }>Post it! </button>
                 </div>
             </div>
             <div className={style.post}>

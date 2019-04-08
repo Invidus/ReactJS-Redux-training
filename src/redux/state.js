@@ -38,12 +38,6 @@ let store = {
 
 
     dispatch(action) {// объект {type: 'ADD-POST'}
-<<<<<<< HEAD:src/redux/store.js
-    this._state.profilePage = profileReducer(this._state.profilePage,action);
-    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action);
-    this._state.sidebarPage = sidebarReducer(this._state.sidebarPage,action);
-    this._callSubscriber(this._state);      //Уведомление 
-=======
         if (action.type === ADD_POST) {
             //Add new post in Profile->Posts
             let newPost = {
@@ -67,7 +61,6 @@ let store = {
             this._state.dialogsPage.messages.push({ id: 6, message: body });
             this._callSubscriber(this._state);
         }
->>>>>>> parent of a6ff086... Add reducers and some refactoring:src/redux/state.js
     },
 
     subscribe(observer) {
