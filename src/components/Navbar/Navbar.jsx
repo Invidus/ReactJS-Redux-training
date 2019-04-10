@@ -21,10 +21,10 @@ const Navbar = (props) => {
             <div className={style.item}>
                 <NavLink to='index.js' activeClassName={style.activeLink}>Settings</NavLink>
             </div>
-            <div className={style.item}>
+            {/* <div className={style.item}>
                 <NavLink to='index.js' activeClassName={style.activeLink}><h3>Friends</h3></NavLink>
                 <Friends name = {props.state.friends}/>
-            </div>
+            </div> */}
         </nav>
     )
 }

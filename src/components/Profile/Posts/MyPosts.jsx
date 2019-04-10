@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
-import { updateNewPostTextActionCreator, addPostActionCreator } from '../../../redux/state';
+
 
 
 
@@ -12,14 +12,15 @@ const Posts = (props) => {
     
     let newPostElement = React.createRef();// Create link(textarea)
 
-    let addPost = () => {
+    let onAddPost = () => {
+        props.addPost()
         // let text = newPostElement.current.value; // current - native html element, 
-        props.dispatch(addPostActionCreator());
+        // props.dispatch(addPostActionCreator());
     }
     let onPostChange = () => {//syncronizing with bll 
         let text = newPostElement.current.value;
-        let action = updateNewPostTextActionCreator(text);
-        props.dispatch(action);
+        props.updateNewPostText(text)
+
     }
 
     return (
@@ -30,7 +31,7 @@ const Posts = (props) => {
                     <textarea onChange = {onPostChange} ref = {newPostElement} value = {props.newPostText}></textarea>
                 </div>
                 <div>
-                    <button onClick = { addPost }>Post it! </button>
+                    <button onClick = { onAddPost }>Post it! </button>
                 </div>
             </div>
             <div className={style.post}>

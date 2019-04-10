@@ -3,19 +3,20 @@ import Style from './Dialogs.module.css';
 import { NavLink } from "react-router-dom";
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/state';
+import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/dialog-reducer';
 
 const Dialogs = (props) => { //Хранятся данные о диалогах 
 
-    let state = props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
     // let newMessageElement = React.createRef();
 
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator());
+        props.sendMessage();
     }
     let onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body));
+        props.updateNewMessageBody(body)
+
     }
 
     let dialogsElements = state.dialogs // Обработка диалогов с сервера
