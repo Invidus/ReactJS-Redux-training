@@ -1,12 +1,7 @@
 import React from 'react';
 import { updateNewPostTextActionCreator, addPostActionCreator } from '../../../redux/profile-reducer';
 import Posts from './MyPosts';
-
 import { connect } from 'react-redux';
-
-
-
-
 
 const mapStateToProps = (state) =>{
     return{
