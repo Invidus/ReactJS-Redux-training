@@ -1,32 +1,50 @@
 const UNFOLLOW = 'UNFOLLOW';
 const FOLLOW = 'FOLLOW';
+const SETUSERS = 'SETUSERS';
 
 let initialState = {
     users: [
-        { id: 1, followed: true, fullName: 'Ivan', status: 'badboy', location: { city: 'Minsk', country: 'Belarus' } },
-        { id: 2, followed: false, fullName: 'Mihail', status: 'friendly', location: { city: 'Moscow', country: 'Russia' } },
+  
     ],
 
 }
 //само действие
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW:
-            let stateCopy = {
+        case FOLLOW: // возвращение true followed
+            return {
                 ...state,
-                users: state.users.map(callbackfn u => {
+                users: state.users.map( u => {
+                    if (u.id === action.userId) {
+                        return { ...u, followed: true }
+                    }
                     return u;
                 })
             }
         case UNFOLLOW:
-
+            return {
+                ...state,
+                users: state.users.map( u => {
+                    if (u.id === action.userId) {
+                        return { ...u, followed: false }
+                    }
+                    return u;
+                })
+            }
+        case SETUSERS:
+            return {
+                ...state, users: [...state.users, ...action.users]
+            }
         default: return state;
 
     }
 }
 // Приход инфы о действии
 export const followAC = (userId) => ({ type: FOLLOW, userId })
+
 export const unfollowAC = (userId) => ({
     type: UNFOLLOW, userId
 })
+export const setUsersAC = (users) => ({ type: SETUSERS, users })
+
 export default usersReducer

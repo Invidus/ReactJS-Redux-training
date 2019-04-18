@@ -1,8 +1,45 @@
 import React from 'react';
+import styles from "./Users.module.css";
 
 let Users = (props) => {
-    return <div>
-        users will be here
+
+    if (props.users.length === 0) {
+        props.setUsers([
+            { id: 1, photoUrl: "https://blog.education-ecosystem.com/wp-content/uploads/2018/12/3_nduuds.jpg", followed: false, fullName: 'Ivan', status: 'badboy', location: { city: 'Minsk', country: 'Belarus' } },
+            { id: 2, photoUrl: "https://blog.education-ecosystem.com/wp-content/uploads/2018/12/3_nduuds.jpg", followed: true, fullName: 'Vasya', status: 'badboy', location: { city: 'Minsk', country: 'Belarus' } }
+
+        ]
+        )
+    }
+
+    return <div>{
+        props.users.map(u =>
+            <div key={u.id}>
+                <span>
+                    <div>
+                        <img src={u.photoUrl} className={styles.usersPhoto}>
+                        </img>
+                    </div>
+                    <div>
+                        {u.followed ?
+                            <button onClick={() => { props.unfollow(u.id) }}>UnFollow</button> :
+                            <button onClick={() => { props.follow(u.id) }}>Follow</button>}
+
+                    </div>
+                </span>
+                <span>
+                    <span>
+                        <div>{u.fullName}</div>
+                        <div>{u.status}</div>
+                    </span>
+                    <span>
+                        <div>{u.location.country}</div>
+                        <div>{u.location.city}</div>
+
+                    </span>
+                </span>
+            </div>)
+    }
     </div>
 }
 
